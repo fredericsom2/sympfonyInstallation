@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Articles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f9f9f9;
+        }
+        .article {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .article h2 {
+            margin-top: 0;
+        }
+        .article time {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8em;
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+        }
+        .unpublished {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des Articles</h1>
+
+    {% for article in articles %}
+        <div class="article">
+            <h2>{{ article.title }}</h2>
+            <img src="{{ article.image }}" alt="Image de {{ article.title }}">
+            <p>{{ article.content }}</p>
+            <time>Publié le {{ article.created_at|date('d/m/Y H:i') }}</time>
+            <div class="badge {{ article.is_published ? '' : 'unpublished' }}">
+                {{ article.is_published ? 'Publié' : 'Non publié' }}
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun article à afficher.</p>
+    {% endfor %}
+</body>
+</html>
